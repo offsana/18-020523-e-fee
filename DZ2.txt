@@ -1,0 +1,338 @@
+1.Как отказаться от изменений в файле (файлах) находящийся в рабочем каталоге (work directory)?
+ОТВЕТ:
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 416 bytes | 416.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:offsana/18-020523-e-fee.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ nano song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   song.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git checkout song.txt
+Updated 1 path from the index
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ nano song.txt
+
+*******************************************************************************
+2.Как вернуть файл из индекса в рабочий каталог?
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ echo "first text" > file.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        file.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git add .
+warning: in the working copy of 'file.txt', LF will be replaced by CRLF the next
+ time Git touches it
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   file.txt
+
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   file.txt
+
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git restore --staged file.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        file.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+*******************************************************************************
+3.Как отменить ошибочный commit ? - Перечислить все возможные варианты.
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ nano song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git add .
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git commit -m "bad commit"
+[main 5a01c58] bad commit
+ 1 file changed, 1 insertion(+)
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log
+commit 5a01c58176362c040f8afe4767e9fa45ac665702 (HEAD -> main)
+Author: Oksana Sadovska <offsana.p@gmail.com>
+Date:   Thu Aug 24 19:06:02 2023 +0300
+
+    bad commit
+
+commit 84bf238e5d24a27063366c0017f51b12dfa262a3
+Merge: d424c6f 9273bee
+Author: Oksana Sadovska <offsana.p@gmail.com>
+Date:   Thu Aug 24 19:01:34 2023 +0300
+
+    Merge branch 'main' of github.com:offsana/18-020523-e-fee
+
+commit d424c6fb581e03e937a80684c4fea9b15ebde4b1
+Author: Oksana Sadovska <offsana.p@gmail.com>
+Date:   Thu Aug 24 18:54:40 2023 +0300
+
+    bad commit
+
+commit 9273bee95421dd82a7a1ad1ca69bc0566d720ae9 (origin/main)
+Author: Oksana Sadovska <124053757+offsana@users.noreply.github.com>
+Date:   Thu Aug 24 18:35:56 2023 +0300
+
+    Create README.md
+
+commit 39e6541b166980e282af6a254b60cbbc11ebcb7f
+Author: Oksana Sadovska <offsana.p@gmail.com>
+Date:   Thu Aug 24 18:33:21 2023 +0300
+
+    first commit
+q
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log --online
+fatal: unrecognized argument: --online
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log --oneline
+5a01c58 (HEAD -> main) bad commit
+84bf238 Merge branch 'main' of github.com:offsana/18-020523-e-fee
+d424c6f bad commit
+9273bee (origin/main) Create README.md
+39e6541 first commit
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git reset HEAD^
+Unstaged changes after reset:
+M       song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log --oneline
+84bf238 (HEAD -> main) Merge branch 'main' of github.com:offsana/18-020523-e-fee
+d424c6f bad commit
+9273bee (origin/main) Create README.md
+39e6541 first commit
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git reset HEAD~2
+Unstaged changes after reset:
+M       song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log --oneline
+39e6541 (HEAD -> main) first commit
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ ls
+README.md  file.txt  song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ nano song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git checkout -a -m "last commit"
+error: unknown switch `a'
+usage: git checkout [<options>] <branch>
+   or: git checkout [<options>] [<branch>] -- <file>...
+
+    -b <branch>           create and checkout a new branch
+    -B <branch>           create/reset and checkout a branch
+    -l                    create reflog for new branch
+    --guess               second guess 'git checkout <no-such-branch>' (default)
+    --overlay             use overlay mode (default)
+    -q, --quiet           suppress progress reporting
+    --recurse-submodules[=<checkout>]
+                          control recursive updating of submodules
+    --progress            force progress reporting
+    -m, --merge           perform a 3-way merge with the new branch
+    --conflict <style>    conflict style (merge, diff3, or zdiff3)
+    -d, --detach          detach HEAD at named commit
+    -t, --track[=(direct|inherit)]
+                          set branch tracking configuration
+    -f, --force           force checkout (throw away local modifications)
+    --orphan <new-branch>
+                          new unparented branch
+    --overwrite-ignore    update ignored files (default)
+    --ignore-other-worktrees
+                          do not check if another worktree is holding the given
+ref
+    -2, --ours            checkout our version for unmerged files
+    -3, --theirs          checkout their version for unmerged files
+    -p, --patch           select hunks interactively
+    --ignore-skip-worktree-bits
+                          do not limit pathspecs to sparse entries only
+    --pathspec-from-file <file>
+                          read pathspec from file
+    --pathspec-file-nul   with --pathspec-from-file, pathspec elements are separ
+ated with NUL character
+
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git add .
+warning: in the working copy of 'file.txt', LF will be replaced by CRLF the next
+ time Git touches it
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git commit -m "last commit"
+[main c72657c] last commit
+ 3 files changed, 3 insertions(+)
+ create mode 100644 README.md
+ create mode 100644 file.txt
+
+*******************************************************************************
+4.Как исправить коммит отправленный на сервер GitHub?
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log --oneline
+1e774d0 (HEAD -> main, origin/main) Merge branch 'main' of github.com:offsana/18
+-020523-e-fee
+c72657c last commit
+9273bee Create README.md
+39e6541 first commit
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ nano song.txt
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git add .
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+Revert "bad commit last"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[main d9a0693] Revert "bad commit last"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git log --oneline
+d9a0693 (HEAD -> main) Revert "bad commit last"
+e074e82 (origin/main) bad commit last
+1e774d0 Merge branch 'main' of github.com:offsana/18-020523-e-fee
+c72657c last commit
+9273bee Create README.md
+39e6541 first commit
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 308 bytes | 308.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:offsana/18-020523-e-fee.git
+   e074e82..d9a0693  main -> main
+
+*******************************************************************************
+5.Как создать новую ветку и переключится в нее?
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git branch
+* main
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git branch first
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git branch
+  first
+* main
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git checkout -b second
+Switched to a new branch 'second'
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (second)
+$ git branch
+  first
+  main
+* second
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (second)
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+Admin@DESKTOP-JBP4RMK MINGW64 ~/18-020523-e-fee (main)
+$ git branch
+  first
+* main
+  second
